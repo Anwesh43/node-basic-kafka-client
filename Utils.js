@@ -4,5 +4,17 @@ class Utils {
         console.log(optionsStr)
         return optionsStr.split(" ")
     }
+
+    static addOptions(pe, options) {
+        Object.keys(options).forEach((key) => {
+            pe.addOption(key, options[key])
+        })
+    }
+
+    static consume(pe, cb) {
+        pe.consumeOutput((message) => {
+            cb(message)
+        })
+    }
 }
 module.exports = Utils
