@@ -14,6 +14,8 @@ class Utils {
     static consume(pe, cb) {
         pe.consumeOutput((message) => {
             cb(message)
+        }, (errMessage) => {
+            console.log(errMessage)
         })
     }
 }
