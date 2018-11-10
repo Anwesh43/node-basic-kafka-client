@@ -18,12 +18,15 @@ class ProcessExecutor {
         this.process.stdin.write(Buffer.from(`${msg} \n`))
     }
 
-    consumeOutput(cb, endcb) {
+    consumeOutput(cb, errcb) {
         this.process.stdout.on('data', (data) => {
-            cb(data.toString())
+            cb(data.toString().replace('\n',''))
         })
         this.process.stderr.on('data', (data) => {
-            endcb(data.toString())
+            errcb(data.toString())
+        })
+        this.process.stdout.on('end', () => {
+            console.log('finish cosuming')
         })
     }
 
